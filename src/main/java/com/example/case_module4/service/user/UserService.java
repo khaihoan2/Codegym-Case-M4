@@ -61,8 +61,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Page<User> findAllByNameOrPhoneOrEmail(String keyword) {
+    public Page<User> findAllByNameOrPhoneOrEmail(String keyword, Pageable pageable) {
         return userRepository
-                .findAllByNameContainingOrPhoneContainingOrEmailContaining(keyword, keyword, keyword);
+                .findAllByNameContainingOrPhoneContainingOrEmailContaining(keyword, keyword, keyword, pageable);
     }
 }

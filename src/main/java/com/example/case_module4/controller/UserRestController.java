@@ -37,7 +37,7 @@ public class UserRestController {
         if (keyword == null || keyword.equals("")) {
             userPage = userService.findAll(pageable);
         } else {
-            userPage = userService.findAllByNameOrPhoneOrEmail(keyword);
+            userPage = userService.findAllByNameOrPhoneOrEmail(keyword, pageable);
         }
         if (userPage.hasContent()) {
             return new ResponseEntity<>(userPage, HttpStatus.OK);

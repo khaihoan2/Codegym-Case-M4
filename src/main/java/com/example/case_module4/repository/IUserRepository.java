@@ -18,6 +18,7 @@ public interface IUserRepository extends JpaRepository<User, Long> {
     Page<User> findAllByNameContainingOrPhoneContainingOrEmailContaining(
             String nameKeyword,
             String phoneKeyword,
-            String emailKeyword
+            String emailKeyword,
+            Pageable pageable
     );
 }

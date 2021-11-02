@@ -13,5 +13,5 @@ public interface IUserService extends IGeneralService<User>, UserDetailsService 
 
     Page<User> findAll(Pageable pageable);
 
-    Page<User> findAllByNameOrPhoneOrEmail(String keyword);
+    Page<User> findAllByNameOrPhoneOrEmail(String keyword, Pageable pageable);
 }
