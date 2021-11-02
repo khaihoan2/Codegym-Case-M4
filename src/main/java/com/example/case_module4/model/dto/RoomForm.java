@@ -29,4 +29,6 @@ public class RoomForm {
     private boolean isAvailable;
 
     private MultipartFile[] files;
+
+
 }
