@@ -3,8 +3,10 @@ package com.example.case_module4.model.dto;
 import com.example.case_module4.model.Category;
 import com.example.case_module4.model.City;
 import com.example.case_module4.model.User;
+import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+@Data
 public class RoomForm {
     private Long id;
 

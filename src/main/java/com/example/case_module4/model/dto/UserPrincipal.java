@@ -2,16 +2,16 @@ package com.example.case_module4.model.dto;
 
 import com.example.case_module4.model.Role;
 import com.example.case_module4.model.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
+@Data
 public class UserPrincipal implements UserDetails {
 
     private Long id;

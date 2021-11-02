@@ -1,10 +1,12 @@
 package com.example.case_module4.model.dto;
 
 import com.example.case_module4.model.Role;
+import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 
+@Data
 public class UserForm {
     private Long id;
 

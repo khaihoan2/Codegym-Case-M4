@@ -4,6 +4,8 @@ import com.example.case_module4.model.User;
 import com.example.case_module4.model.dto.UserPrincipal;
 import com.example.case_module4.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -50,9 +52,17 @@ public class UserService implements IUserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> optionalUser = userRepository.findByUsername(username);
-        if (optionalUser.isPresent()) {
-            return UserPrincipal.build(optionalUser.get());
-        }
-        return null;
+        return optionalUser.map(UserPrincipal::build).orElse(null);
+    }
+
+    @Override
+    public Page<User> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<User> findAllByNameOrPhoneOrEmail(String keyword) {
+        return userRepository
+                .findAllByNameContainingOrPhoneContainingOrEmailContaining(keyword, keyword, keyword);
     }
 }
