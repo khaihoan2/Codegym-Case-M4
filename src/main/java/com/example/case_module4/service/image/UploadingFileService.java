@@ -1,7 +1,6 @@
 package com.example.case_module4.service.image;
 
 import com.example.case_module4.model.UploadingFile;
-import com.example.case_module4.model.Review;
 import com.example.case_module4.model.User;
 import com.example.case_module4.repository.IUploadingFileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,8 @@ public class UploadingFileService implements IUploadingFileService {
     }
 
     @Override
-    public Optional<Review> deleteById(Long id) {
+    public void deleteById(Long id) {
         uploadingFileRepository.deleteById(id);
-        return null;
     }
 
     @Override
