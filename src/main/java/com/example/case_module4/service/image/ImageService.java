@@ -1,6 +1,7 @@
 package com.example.case_module4.service.image;
 
 import com.example.case_module4.model.Image;
+import com.example.case_module4.model.Review;
 import com.example.case_module4.repository.IImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,8 @@ public class ImageService implements IImageService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public Optional<Review> deleteById(Long id) {
         imageRepository.deleteById(id);
+        return null;
     }
 }
