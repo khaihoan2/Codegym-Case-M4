@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/review")
+@RequestMapping("/api/reviews")
 public class ReviewRestController {
 
     @Autowired
@@ -28,9 +28,13 @@ public class ReviewRestController {
         Optional<Review> reviewOptional = reviewService.findById(id);
         if (!reviewOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }else {
-            return new ResponseEntity<>(HttpStatus.OK);
         }
+        return new ResponseEntity<>(reviewOptional.get(),HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Review> createReview(@RequestBody Review review){
+        return new ResponseEntity<>(reviewService.save(review),HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -40,6 +44,7 @@ public class ReviewRestController {
         if (!reviewOptional.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        review.setId(id);
         return new ResponseEntity<>(reviewService.save(review),HttpStatus.OK);
     }
 
