@@ -3,7 +3,6 @@ package com.example.case_module4.controller;
 
 import com.example.case_module4.model.Image;
 import com.example.case_module4.service.image.IImageService;
-import com.example.case_module4.service.image.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +31,6 @@ public class ImageRestController {
         } else {
             return new ResponseEntity<>(HttpStatus.OK);
         }
-
     }
 
     @PostMapping

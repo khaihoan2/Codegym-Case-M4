@@ -1,8 +1,10 @@
 package com.example.case_module4.controller;
 
 import com.example.case_module4.exception.NotFoundException;
+import com.example.case_module4.model.Image;
 import com.example.case_module4.model.User;
 import com.example.case_module4.model.dto.UserForm;
+import com.example.case_module4.service.image.IImageService;
 import com.example.case_module4.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,8 +28,8 @@ public class UserRestController {
     @Autowired
     private IUserService userService;
 
-//    @Autowired
-//    private IImageService imageService;
+    @Autowired
+    private IImageService imageService;
 
     @GetMapping
     public ResponseEntity<?> findAll(@RequestParam(name = "q", required = false)
@@ -74,7 +76,7 @@ public class UserRestController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        imageService.save(image);
+        imageService.save(new Image(imageName, user));
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 

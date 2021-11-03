@@ -7,10 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -34,4 +31,23 @@ public class BookingRestController {
         Optional<Booking> bookingOptional = bookingService.findById(id);
         return new ResponseEntity<>(bookingOptional.get(), HttpStatus.OK);
     }
+
+    @PostMapping
+    public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
+        return new ResponseEntity<>(bookingService.save(booking), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Booking> updateBooking(@PathVariable Long id,
+                                                 @RequestBody Booking booking) {
+        booking.setId(id);
+        return new ResponseEntity<>(bookingService.save(booking), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Booking> removeBooking(@PathVariable Long id) {
+        bookingService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

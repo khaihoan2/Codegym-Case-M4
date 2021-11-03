@@ -26,4 +26,14 @@ public class Image {
 
     public Image() {
     }
+
+    public Image(String name, User user) {
+        this.name = name;
+        this.user = user;
+    }
+
+    public Image(String name, Room room) {
+        this.name = name;
+        this.room = room;
+    }
 }
