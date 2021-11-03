@@ -36,4 +36,8 @@ public class UploadingFile {
         this.name = name;
         this.room = room;
     }
+
+    public Image(String fileName) {
+
+    }
 }
