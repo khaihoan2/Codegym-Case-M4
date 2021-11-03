@@ -1,6 +1,7 @@
 package com.example.case_module4.service.booking;
 
 import com.example.case_module4.model.Booking;
+import com.example.case_module4.model.Review;
 import com.example.case_module4.model.User;
 import com.example.case_module4.repository.IBookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,9 @@ public class BookingService implements IBookingService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public Optional<Review> deleteById(Long id) {
         bookingRepository.deleteById(id);
+        return null;
     }
 
     @Override
