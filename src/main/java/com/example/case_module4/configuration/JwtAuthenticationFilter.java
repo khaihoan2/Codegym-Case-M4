@@ -1,4 +1,4 @@
-package com.example.case_module4.configuration.security;
+package com.example.case_module4.configuration;
 
 import com.example.case_module4.service.JwtService;
 import com.example.case_module4.service.user.UserService;
@@ -29,7 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
             String jwt = getJwtFromRequest(request);
-            if (jwt != null & jwtService.validateJwt(jwt)) {
+            if (jwt != null && jwtService.validateJwt(jwt)) {
                 String username = jwtService.getUsernameFromJwt(jwt);
                 UserDetails userDetails = userService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken token

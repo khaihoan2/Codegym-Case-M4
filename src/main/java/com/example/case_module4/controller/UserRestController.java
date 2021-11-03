@@ -1,10 +1,13 @@
 package com.example.case_module4.controller;
 
 import com.example.case_module4.exception.NotFoundException;
+import com.example.case_module4.model.UploadingFile;
 import com.example.case_module4.model.User;
 import com.example.case_module4.model.dto.UserForm;
+import com.example.case_module4.service.image.IUploadingFileService;
 import com.example.case_module4.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -23,11 +26,14 @@ public class UserRestController {
 
     public static final String NO_RESULTS = "There's no results!";
 
+    @Value("${file-upload}")
+    private String fileUpload;
+
     @Autowired
     private IUserService userService;
 
-//    @Autowired
-//    private IImageService imageService;
+    @Autowired
+    private IUploadingFileService uploadingFileService;
 
     @GetMapping
     public ResponseEntity<?> findAll(@RequestParam(name = "q", required = false)
@@ -67,14 +73,14 @@ public class UserRestController {
         user.setAddress(userForm.getAddress());
         user.setRoles(userForm.getRoles());
 
-        MultipartFile image = userForm.getImage();
-        String imageName = image.getOriginalFilename() + System.currentTimeMillis();
+        MultipartFile uploadingFile = userForm.getImage();
+        String fileName = uploadingFile.getOriginalFilename() + System.currentTimeMillis();
         try {
-            FileCopyUtils.copy(image.getBytes(), new File(imageName));
+            FileCopyUtils.copy(uploadingFile.getBytes(), new File(fileName));
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        imageService.save(image);
+        uploadingFileService.save(new UploadingFile(fileName, user));
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 

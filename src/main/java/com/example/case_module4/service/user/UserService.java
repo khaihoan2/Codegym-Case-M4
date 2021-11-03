@@ -1,5 +1,6 @@
 package com.example.case_module4.service.user;
 
+import com.example.case_module4.model.Review;
 import com.example.case_module4.model.User;
 import com.example.case_module4.model.dto.UserPrincipal;
 import com.example.case_module4.repository.IUserRepository;
@@ -40,8 +41,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public Optional<Review> deleteById(Long id) {
         userRepository.deleteById(id);
+        return null;
     }
 
     @Override
