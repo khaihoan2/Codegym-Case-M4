@@ -26,4 +26,8 @@ public class Image {
 
     public Image() {
     }
+
+    public Image(String fileName) {
+
+    }
 }
