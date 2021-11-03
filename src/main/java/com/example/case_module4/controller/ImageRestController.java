@@ -1,8 +1,8 @@
 package com.example.case_module4.controller;
 
 
-import com.example.case_module4.model.Image;
-import com.example.case_module4.service.image.IImageService;
+import com.example.case_module4.model.UploadingFile;
+import com.example.case_module4.service.image.IUploadingFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,18 +15,18 @@ import java.util.Optional;
 public class ImageRestController {
 
     @Autowired
-    private IImageService imageService;
+    private IUploadingFileService uploadingFileService;
 
     @GetMapping
-    public ResponseEntity<Iterable<Image>> showListAll() {
-        Iterable<Image> images = imageService.findAll();
-        return new ResponseEntity<>(images, HttpStatus.OK);
+    public ResponseEntity<Iterable<UploadingFile>> showListAll() {
+        Iterable<UploadingFile> uploadingFiles = uploadingFileService.findAll();
+        return new ResponseEntity<>(uploadingFiles, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Image> findById(@PathVariable Long id) {
-        Optional<Image> imageOptional = imageService.findById(id);
-        if (!imageOptional.isPresent()) {
+    public ResponseEntity<UploadingFile> findById(@PathVariable Long id) {
+        Optional<UploadingFile> uploadingFileOptional = uploadingFileService.findById(id);
+        if (!uploadingFileOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -34,28 +34,28 @@ public class ImageRestController {
     }
 
     @PostMapping
-    public ResponseEntity<Image> createImage(@RequestBody Image image) {
-        return new ResponseEntity<>(imageService.save(image), HttpStatus.CREATED);
+    public ResponseEntity<UploadingFile> createImage(@RequestBody UploadingFile uploadingFile) {
+        return new ResponseEntity<>(uploadingFileService.save(uploadingFile), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Image> updateImage(@PathVariable Long id,
-                                             @RequestBody Image image) {
-        Optional<Image> imageOptional = imageService.findById(id);
+    public ResponseEntity<UploadingFile> updateImage(@PathVariable Long id,
+                                                     @RequestBody UploadingFile uploadingFile) {
+        Optional<UploadingFile> imageOptional = uploadingFileService.findById(id);
         if (!imageOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        image.setId(id);
-        return new ResponseEntity<>(imageService.save(image), HttpStatus.OK);
+        uploadingFile.setId(id);
+        return new ResponseEntity<>(uploadingFileService.save(uploadingFile), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Image> deleteImage(@PathVariable Long id) {
-        Optional<Image> imageOptional = imageService.findById(id);
+    public ResponseEntity<UploadingFile> deleteImage(@PathVariable Long id) {
+        Optional<UploadingFile> imageOptional = uploadingFileService.findById(id);
         if (!imageOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        imageService.deleteById(id);
+        uploadingFileService.deleteById(id);
         return new ResponseEntity<>(imageOptional.get(), HttpStatus.NO_CONTENT);
     }
 }
