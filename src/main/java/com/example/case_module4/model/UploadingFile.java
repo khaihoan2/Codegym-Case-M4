@@ -24,6 +24,8 @@ public class UploadingFile {
     @JoinColumn(name = "room_id")
     private Room room;
 
+    public UploadingFile() {
+    }
 
     public UploadingFile(String name, User user) {
         this.name = name;
@@ -33,9 +35,5 @@ public class UploadingFile {
     public UploadingFile(String name, Room room) {
         this.name = name;
         this.room = room;
-    }
-
-    public UploadingFile() {
-
     }
 }
