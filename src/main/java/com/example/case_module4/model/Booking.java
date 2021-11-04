@@ -16,6 +16,10 @@ public class Booking {
     @JoinColumn(name = "guest_user_id")
     private User guest;
 
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
+
     private LocalDate checkIn;
 
     private LocalDate checkOut;
