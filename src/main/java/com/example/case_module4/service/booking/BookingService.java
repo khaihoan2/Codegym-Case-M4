@@ -45,4 +45,9 @@ public class BookingService implements IBookingService {
     public Page<Booking> findAll(Pageable pageable) {
         return bookingRepository.findAll(pageable);
     }
+    @Override
+    public boolean checkRoomAvailable(Long id) {
+        bookingRepository.checkRoomAvailable(id);
+        return true;
+    }
 }
