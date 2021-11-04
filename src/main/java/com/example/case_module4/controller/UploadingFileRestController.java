@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/images")
-public class ImageRestController {
+public class UploadingFileRestController {
 
     @Autowired
     private IUploadingFileService uploadingFileService;

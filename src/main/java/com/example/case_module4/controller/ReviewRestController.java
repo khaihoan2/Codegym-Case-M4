@@ -1,6 +1,7 @@
 package com.example.case_module4.controller;
 
 import com.example.case_module4.model.Review;
+import com.example.case_module4.service.JwtService;
 import com.example.case_module4.service.review.IReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/reviews")
 public class ReviewRestController {
+
+    @Autowired
+    private JwtService jwtService;
 
     @Autowired
     private IReviewService reviewService;
@@ -29,31 +33,31 @@ public class ReviewRestController {
         if (!reviewOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(reviewOptional.get(),HttpStatus.OK);
+        return new ResponseEntity<>(reviewOptional.get(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Review> createReview(@RequestBody Review review){
-        return new ResponseEntity<>(reviewService.save(review),HttpStatus.CREATED);
+    public ResponseEntity<?> createReview(@RequestBody Review review) {
+            return new ResponseEntity<>(reviewService.save(review), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Review> updateReview(@PathVariable Review review,
-                                               @RequestBody Long id){
+                                               @RequestBody Long id) {
         Optional<Review> reviewOptional = reviewService.findById(id);
-        if (!reviewOptional.isPresent()){
+        if (!reviewOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         review.setId(id);
-        return new ResponseEntity<>(reviewService.save(review),HttpStatus.OK);
+        return new ResponseEntity<>(reviewService.save(review), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Review> deleteReview(@PathVariable Long id){
+    public ResponseEntity<Review> deleteReview(@PathVariable Long id) {
         Optional<Review> reviewOptional = reviewService.findById(id);
-        if (!reviewOptional.isPresent()){
+        if (!reviewOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(reviewOptional.get(),HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(reviewOptional.get(), HttpStatus.NO_CONTENT);
     }
 }
