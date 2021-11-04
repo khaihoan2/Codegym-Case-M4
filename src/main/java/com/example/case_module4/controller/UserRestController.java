@@ -1,10 +1,12 @@
 package com.example.case_module4.controller;
 
 import com.example.case_module4.exception.NotFoundException;
+import com.example.case_module4.model.Review;
 import com.example.case_module4.model.UploadingFile;
 import com.example.case_module4.model.User;
 import com.example.case_module4.model.dto.UserForm;
 import com.example.case_module4.service.image.IUploadingFileService;
+import com.example.case_module4.service.review.IReviewService;
 import com.example.case_module4.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +36,9 @@ public class UserRestController {
 
     @Autowired
     private IUploadingFileService uploadingFileService;
+
+    @Autowired
+    private IReviewService reviewService;
 
     @GetMapping
     public ResponseEntity<?> findAll(@RequestParam(name = "q", required = false)
@@ -119,8 +124,15 @@ public class UserRestController {
     public ResponseEntity<?> removeUser(@PathVariable Long id) throws NotFoundException {
         Optional<User> userOptional = userService.findById(id);
         if (userOptional.isPresent()) throw new NotFoundException();
-//        Delete the image first
 
+//        Delete the image in the database
+        UploadingFile uploadingFile = uploadingFileService.findByUser(userOptional.get()).get();
+        uploadingFileService.deleteById(uploadingFile.getId());
+//
+        new File(fileUpload + uploadingFile.getName()).delete();
+//        Delete Review in the database
+
+        Review review = reviewService.findById(id).get();
         userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
