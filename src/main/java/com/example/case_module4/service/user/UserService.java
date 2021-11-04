@@ -1,6 +1,5 @@
 package com.example.case_module4.service.user;
 
-import com.example.case_module4.model.Review;
 import com.example.case_module4.model.User;
 import com.example.case_module4.model.dto.UserPrincipal;
 import com.example.case_module4.repository.IUserRepository;

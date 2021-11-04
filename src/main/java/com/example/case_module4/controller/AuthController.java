@@ -1,11 +1,11 @@
 package com.example.case_module4.controller;
 
-import com.example.case_module4.model.Image;
+import com.example.case_module4.model.UploadingFile;
 import com.example.case_module4.model.User;
 import com.example.case_module4.model.dto.JwtResponse;
 import com.example.case_module4.model.dto.UserForm;
 import com.example.case_module4.service.JwtService;
-import com.example.case_module4.service.image.IImageService;
+import com.example.case_module4.service.image.IUploadingFileService;
 import com.example.case_module4.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +35,7 @@ public class AuthController {
     private IUserService userService;
 
     @Autowired
-    private IImageService imageService;
+    private IUploadingFileService imageService;
 
     @GetMapping("/hello")
     public ResponseEntity<String> hello() {
@@ -84,7 +84,7 @@ public class AuthController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        imageService.save(new Image(imageName, user));
+        imageService.save(new UploadingFile(imageName, user));
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 }

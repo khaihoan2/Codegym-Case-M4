@@ -1,7 +1,6 @@
 package com.example.case_module4.service.booking;
 
 import com.example.case_module4.model.Booking;
-import com.example.case_module4.model.Review;
 import com.example.case_module4.model.User;
 import com.example.case_module4.repository.IBookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;

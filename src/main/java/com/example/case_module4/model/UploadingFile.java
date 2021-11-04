@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 @Entity
-public class Image {
+public class UploadingFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,15 +24,15 @@ public class Image {
     @JoinColumn(name = "room_id")
     private Room room;
 
-    public Image() {
+    public UploadingFile() {
     }
 
-    public Image(String name, User user) {
+    public UploadingFile(String name, User user) {
         this.name = name;
         this.user = user;
     }
 
-    public Image(String name, Room room) {
+    public UploadingFile(String name, Room room) {
         this.name = name;
         this.room = room;
     }

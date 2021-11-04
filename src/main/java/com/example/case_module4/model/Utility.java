@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 @Entity
-public class Service {
+public class Utility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,6 +16,6 @@ public class Service {
     @Column(unique = true)
     private String name;
 
-    public Service() {
+    public Utility() {
     }
 }
