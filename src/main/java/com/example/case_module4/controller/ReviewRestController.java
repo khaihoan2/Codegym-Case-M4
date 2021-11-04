@@ -50,7 +50,7 @@ public class ReviewRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Review> deleteReview(@PathVariable Long id){
-        Optional<Review> reviewOptional = reviewService.deleteById(id);
+        Optional<Review> reviewOptional = reviewService.findById(id);
         if (!reviewOptional.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
