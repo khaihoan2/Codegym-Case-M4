@@ -5,6 +5,8 @@ import com.example.case_module4.repository.IRoomRepository;
 import com.example.case_module4.service.booking.IBookingService;
 import com.example.case_module4.service.review.IReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -45,5 +47,15 @@ public class RoomService implements IRoomService {
     @Override
     public void deleteById(Long id) {
         roomRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Room> findAll(Pageable pageable) {
+        return roomRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Room> find(String nameCity, String nameCategory, double areaRoom, int bedsRoom, double priceRoom, int bathsRoom, Pageable pageable) {
+        return roomRepository.find(nameCity,nameCategory,areaRoom,bedsRoom,priceRoom,bathsRoom,pageable);
     }
 }
