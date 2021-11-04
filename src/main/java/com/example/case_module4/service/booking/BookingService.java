@@ -33,9 +33,8 @@ public class BookingService implements IBookingService {
     }
 
     @Override
-    public Optional<Review> deleteById(Long id) {
+    public void deleteById(Long id) {
         bookingRepository.deleteById(id);
-        return null;
     }
 
     @Override
@@ -46,5 +45,10 @@ public class BookingService implements IBookingService {
     @Override
     public Page<Booking> findAll(Pageable pageable) {
         return bookingRepository.findAll(pageable);
+    }
+    @Override
+    public boolean checkRoomAvailable(Long id) {
+        bookingRepository.checkRoomAvailable(id);
+        return true;
     }
 }

@@ -31,9 +31,8 @@ public class UploadingFileService implements IUploadingFileService {
     }
 
     @Override
-    public Optional<Review> deleteById(Long id) {
+    public void deleteById(Long id) {
         uploadingFileRepository.deleteById(id);
-        return null;
     }
 
     @Override

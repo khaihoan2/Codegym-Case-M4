@@ -11,5 +11,5 @@ public interface IGeneralService<T> {
 
     T save(T t);
 
-    Optional<Review> deleteById(Long id);
+    void deleteById(Long id);
 }

@@ -29,9 +29,8 @@ public class RoleService implements IRoleService{
     }
 
     @Override
-    public Optional<Review> deleteById(Long id) {
+    public void deleteById(Long id) {
         roleRepository.deleteById(id);
-        return null;
     }
 
     @Override
