@@ -33,9 +33,8 @@ public class BookingService implements IBookingService {
     }
 
     @Override
-    public Optional<Review> deleteById(Long id) {
+    public void deleteById(Long id) {
         bookingRepository.deleteById(id);
-        return null;
     }
 
     @Override

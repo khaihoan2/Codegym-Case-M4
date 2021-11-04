@@ -29,8 +29,7 @@ public class ReviewService implements IReviewService {
     }
 
     @Override
-    public Optional<Review> deleteById(Long id) {
+    public void  deleteById(Long id) {
         reviewRepository.deleteById(id);
-        return null;
     }
 }

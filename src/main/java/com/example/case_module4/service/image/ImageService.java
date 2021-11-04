@@ -30,8 +30,7 @@ public class ImageService implements IImageService {
     }
 
     @Override
-    public Optional<Review> deleteById(Long id) {
+    public void deleteById(Long id) {
         imageRepository.deleteById(id);
-        return null;
     }
 }

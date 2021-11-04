@@ -41,9 +41,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Optional<Review> deleteById(Long id) {
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
-        return null;
     }
 
     @Override

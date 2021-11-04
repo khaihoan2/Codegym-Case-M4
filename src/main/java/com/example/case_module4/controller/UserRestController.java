@@ -107,6 +107,7 @@ public class UserRestController {
             e.printStackTrace();
         }
 //        Delete the existing then save the new one
+
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 
@@ -115,6 +116,7 @@ public class UserRestController {
         Optional<User> userOptional = userService.findById(id);
         if (userOptional.isPresent()) throw new NotFoundException();
 //        Delete the image first
+
         userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
