@@ -55,7 +55,7 @@ public class RoomService implements IRoomService {
     }
 
     @Override
-    public Page<Room> find(String nameCity, String nameCategory, double areaRoom, int bedsRoom, double priceRoom, int bathsRoom, Pageable pageable) {
+    public Page<Room> find(String nameCity, String nameCategory, Double areaRoom, Integer bedsRoom, Double priceRoom, Integer bathsRoom, Pageable pageable) {
         return roomRepository.find(nameCity,nameCategory,areaRoom,bedsRoom,priceRoom,bathsRoom,pageable);
     }
 }

@@ -32,4 +32,9 @@ public class ReviewService implements IReviewService {
     public void deleteById(Long id) {
         reviewRepository.deleteById(id);
     }
+
+    @Override
+    public Long avgReview(Long id) {
+        return null;
+    }
 }
