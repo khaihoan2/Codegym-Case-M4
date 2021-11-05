@@ -128,13 +128,14 @@ public class UserRestController {
 //        Delete the image in the database
         UploadingFile uploadingFile = uploadingFileService.findByUser(userOptional.get()).get();
         uploadingFileService.deleteById(uploadingFile.getId());
-//
+//        Delete the archive folder File image .
         new File(fileUpload + uploadingFile.getName()).delete();
-//        Delete Review in the database
 
+
+//        Delete Review in the database
         Review review = reviewService.findById(id).get();
         reviewService.deleteById(review.getId());
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }
