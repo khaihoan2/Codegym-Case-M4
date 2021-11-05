@@ -40,7 +40,6 @@ public class ReviewRestController {
     @PostMapping
     public ResponseEntity<?> createReview(@RequestBody Review review) {
         //Only people who have booked a room can rate the rented room.
-
             return new ResponseEntity<>(reviewService.save(review), HttpStatus.CREATED);
     }
 
