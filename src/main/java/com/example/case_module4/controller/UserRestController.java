@@ -133,7 +133,7 @@ public class UserRestController {
 //        Delete Review in the database
 
         Review review = reviewService.findById(id).get();
-        userService.deleteById(id);
+        reviewService.deleteById(review.getId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
