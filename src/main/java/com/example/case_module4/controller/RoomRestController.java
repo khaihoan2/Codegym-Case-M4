@@ -146,7 +146,7 @@ public class RoomRestController {
                 bathsRoom == null || bathsRoom.equals("")) {
             rooms = roomService.findAll(pageable);
         } else {
-            rooms = roomService.find(cityId, categoryId, minAreaRoom, maxAreaRoom, bedsRoom, minPriceRoom, maxPriceRoom,bathsRoom,pageable);
+            rooms = roomService.find_room(cityId, categoryId, minAreaRoom, maxAreaRoom, bedsRoom, minPriceRoom, maxPriceRoom,bathsRoom,pageable);
         }
 
         return new ResponseEntity<>(rooms, HttpStatus.OK);
