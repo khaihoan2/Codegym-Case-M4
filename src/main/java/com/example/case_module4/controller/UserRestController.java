@@ -24,6 +24,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin("*")
 public class UserRestController {
 
     public static final String NO_RESULTS = "There's no results!";

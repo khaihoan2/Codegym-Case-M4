@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/reviews")
+@CrossOrigin("*")
 public class ReviewRestController {
 
     @Autowired
@@ -38,6 +39,8 @@ public class ReviewRestController {
 
     @PostMapping
     public ResponseEntity<?> createReview(@RequestBody Review review) {
+        //Only people who have booked a room can rate the rented room.
+
             return new ResponseEntity<>(reviewService.save(review), HttpStatus.CREATED);
     }
 
