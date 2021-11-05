@@ -55,7 +55,9 @@ public class RoomService implements IRoomService {
     }
 
     @Override
-    public Page<Room> find(String nameCity, String nameCategory, double areaRoom, int bedsRoom, double priceRoom, int bathsRoom, Pageable pageable) {
-        return roomRepository.find(nameCity,nameCategory,areaRoom,bedsRoom,priceRoom,bathsRoom,pageable);
+    public Page<Room> find_room(String nameCity, String nameCategory, Double minAreaRoom, Double maxAreaRoom, String bedsRoom, Double minPriceRoom, Double maxPriceRoom, String bathsRoom, Pageable pageable) {
+        return roomRepository.find_room(nameCity,nameCategory,minAreaRoom,maxAreaRoom,bedsRoom,minPriceRoom,maxPriceRoom,bathsRoom,pageable);
     }
+
+
 }

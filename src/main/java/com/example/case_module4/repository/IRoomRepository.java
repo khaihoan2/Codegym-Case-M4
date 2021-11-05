@@ -1,7 +1,6 @@
 package com.example.case_module4.repository;
 
 import com.example.case_module4.model.Room;
-import com.example.case_module4.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface IRoomRepository extends JpaRepository<Room,Long> {
     Page<Room> findAll(Pageable pageable);
 
-    @Query(value = "call find(?1,?2,?3,?4,?5,?6)",nativeQuery = true)
-    Page<Room> find(String nameCity, String nameCategory, double areaRoom, int bedsRoom, double priceRoom, int bathsRoom, Pageable pageable);
+    @Query(value = "call find_room(?1,?2,?3,?4,?5,?6,?7,?8)",nativeQuery = true)
+    Page<Room> find_room(String nameCity, String nameCategory, Double minAreaRoom,Double maxAreaRoom, String bedsRoom, Double minPriceRoom, Double maxPriceRoom, String bathsRoom, Pageable pageable);
 }

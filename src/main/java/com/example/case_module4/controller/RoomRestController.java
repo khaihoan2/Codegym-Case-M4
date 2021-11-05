@@ -127,19 +127,26 @@ public class RoomRestController {
     }
 
     @GetMapping("/findRoom")
-    public ResponseEntity<?> findRoom(@RequestParam(name = "nameCity", required = false) String nameCity,
-                                      @RequestParam(name = "nameCategory", required = false) String nameCategory,
-                                      @RequestParam(name = "aresRoom", required = false) double aresRoom,
-                                      @RequestParam(name = "bedsRoom", required = false) int bedsRoom,
-                                      @RequestParam(name = "priceRoom", required = false) double priceRoom,
-                                      @RequestParam(name = "bathsRoom", required = false) int bathsRoom,
+    public ResponseEntity<?> findRoom(@RequestParam(name = "cityId", required = false) String cityId,
+                                      @RequestParam(name = "categoryId", required = false) String categoryId,
+                                      @RequestParam(name = "minAreaRoom", required = false) Double minAreaRoom,
+                                      @RequestParam(name = "maxAreaRoom", required = false) Double maxAreaRoom,
+                                      @RequestParam(name = "bedsRoom", required = false) String bedsRoom,
+                                      @RequestParam(name = "minPriceRoom", required = false) Double minPriceRoom,
+                                      @RequestParam(name = "maxPriceRoom", required = false) Double maxPriceRoom,
+                                      @RequestParam(name = "bathsRoom", required = false) String bathsRoom,
                                       @PageableDefault(size = 3) Pageable pageable) {
-        Page<Room> rooms;
-        if (nameCity == null || nameCity.equals("") ||
-                nameCategory == null || nameCategory.equals("")) {
+
+        Page<Room> rooms = null;
+        if (cityId == null || cityId.equals("") ||
+                categoryId == null || categoryId.equals("")
+                || minAreaRoom == null || maxAreaRoom==null
+                || bedsRoom == null || bedsRoom.equals("")
+                || minPriceRoom == null || maxPriceRoom == null||
+                bathsRoom == null || bathsRoom.equals("")) {
             rooms = roomService.findAll(pageable);
         } else {
-            rooms = roomService.find(nameCity, nameCategory, aresRoom, bedsRoom, priceRoom, bathsRoom, pageable);
+            rooms = roomService.find_room(cityId, categoryId, minAreaRoom, maxAreaRoom, bedsRoom, minPriceRoom, maxPriceRoom,bathsRoom,pageable);
         }
 
         return new ResponseEntity<>(rooms, HttpStatus.OK);
