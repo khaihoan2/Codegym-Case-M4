@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface IReviewRepository extends JpaRepository<Review, Long> {
     @Query(value = "call avgReview (?1)",nativeQuery = true)
     Long avgReview(Long id);
+
 }

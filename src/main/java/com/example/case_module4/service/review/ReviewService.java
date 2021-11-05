@@ -1,10 +1,12 @@
 package com.example.case_module4.service.review;
 
 import com.example.case_module4.model.Review;
+import com.example.case_module4.model.User;
 import com.example.case_module4.repository.IReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,4 +39,10 @@ public class ReviewService implements IReviewService {
     public Long avgReview(Long id) {
         return null;
     }
+
+    @Override
+    public Optional<Review> findByUser(User user) {
+        return null;
+    }
+
 }

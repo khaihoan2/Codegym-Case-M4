@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/subscriber")
+@CrossOrigin("*")
 public class SubscriberRestController {
     @Autowired
     private ISubscriberService subscriberService;

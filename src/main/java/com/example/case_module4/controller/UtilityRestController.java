@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/utility")
+@CrossOrigin("*")
 public class UtilityRestController {
     @Autowired
     private IUtilityService utilityService;

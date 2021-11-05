@@ -24,6 +24,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin("*")
 public class UserRestController {
 
     public static final String NO_RESULTS = "There's no results!";
@@ -128,13 +129,13 @@ public class UserRestController {
 //        Delete the image in the database
         UploadingFile uploadingFile = uploadingFileService.findByUser(userOptional.get()).get();
         uploadingFileService.deleteById(uploadingFile.getId());
-//
+//        Delete the archive folder File image .
         new File(fileUpload + uploadingFile.getName()).delete();
+        //-------------------------------------//
 //        Delete Review in the database
+        Review review = reviewService.findByUser(userOptional.get()).get();
+        reviewService.deleteById(review.getId());
 
-        Review review = reviewService.findById(id).get();
-        userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }
