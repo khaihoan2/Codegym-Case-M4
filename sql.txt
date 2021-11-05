@@ -1,0 +1,9 @@
+create view find_room_by_avg_rating as
+select r.id, r.price , r.address, r.area, r.baths, r.beds, r.is_available isAvailable, r.category_id categoryId, r.city_id cityId, r.host_user_id hostUserId, avg(r2.rating) as avgRating
+from room r
+inner join review r2 on r.id = r2.room_id
+where r.is_available = true
+group by r.id
+order by avgRating desc;
+
+select * from find_room_by_avg_rating

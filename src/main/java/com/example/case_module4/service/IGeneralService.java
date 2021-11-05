@@ -1,7 +1,5 @@
 package com.example.case_module4.service;
 
-import com.example.case_module4.model.Review;
-
 import java.util.Optional;
 
 public interface IGeneralService<T> {
@@ -11,5 +9,5 @@ public interface IGeneralService<T> {
 
     T save(T t);
 
-    Optional<Review> deleteById(Long id);
+    void deleteById(Long id);
 }

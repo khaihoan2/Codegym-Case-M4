@@ -22,16 +22,16 @@ public class Room {
     private User host;
 
     @NotEmpty
-    private double area;
+    private Double area;
 
     @NotEmpty
-    private double price;
+    private Double price;
 
     @NotNull
-    private int beds;
+    private Integer beds;
 
     @NotNull
-    private int baths;
+    private Integer baths;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
@@ -40,9 +40,7 @@ public class Room {
     @NotEmpty
     private String address;
 
-    private double avgRating;
-
-    private boolean isAvailable;
+    private Boolean isAvailable;
 
     public Room() {
     }

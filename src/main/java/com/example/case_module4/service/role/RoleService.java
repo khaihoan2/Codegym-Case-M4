@@ -1,6 +1,5 @@
 package com.example.case_module4.service.role;
 
-import com.example.case_module4.model.Review;
 import com.example.case_module4.model.Role;
 import com.example.case_module4.repository.IRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +28,8 @@ public class RoleService implements IRoleService{
     }
 
     @Override
-    public Optional<Review> deleteById(Long id) {
+    public void deleteById(Long id) {
         roleRepository.deleteById(id);
-        return null;
     }
 
     @Override
