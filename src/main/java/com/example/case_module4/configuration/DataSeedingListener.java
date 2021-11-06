@@ -39,7 +39,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             roleRepository.save(new Role(RoleName.ROLE_USER));
         }
 
-        // Default admin user
+        // Default administrator
         if (!userRepository.findByUsername("admin").isPresent()) {
             User user = new User();
             user.setName("admin");

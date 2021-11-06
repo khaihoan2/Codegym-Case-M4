@@ -1,12 +1,12 @@
 package com.example.case_module4.controller;
 
 import com.example.case_module4.model.Review;
-import com.example.case_module4.service.JwtService;
+import com.example.case_module4.service.booking.IBookingService;
 import com.example.case_module4.service.review.IReviewService;
+import com.example.case_module4.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -17,10 +17,13 @@ import java.util.Optional;
 public class ReviewRestController {
 
     @Autowired
-    private JwtService jwtService;
+    private IReviewService reviewService;
 
     @Autowired
-    private IReviewService reviewService;
+    private IBookingService bookingService;
+
+    @Autowired
+    private IUserService userService;
 
     @GetMapping
     public ResponseEntity<Iterable<Review>> showListAll() {
@@ -40,7 +43,7 @@ public class ReviewRestController {
     @PostMapping
     public ResponseEntity<?> createReview(@RequestBody Review review) {
         //Only people who have booked a room can rate the rented room.
-            return new ResponseEntity<>(reviewService.save(review), HttpStatus.CREATED);
+        return new ResponseEntity<>(reviewService.save(review), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
