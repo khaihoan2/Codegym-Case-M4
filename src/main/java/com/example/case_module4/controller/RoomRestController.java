@@ -57,18 +57,7 @@ public class RoomRestController {
 
     @PostMapping()
     public ResponseEntity<Room> createRoom(@RequestBody RoomForm roomForm) {
-        Room room = new Room();
-        if (roomForm.getId() != null) {
-            room.setId(roomForm.getId());
-        }
-        room.setCategory(roomForm.getCategory());
-        room.setHost(roomForm.getHost());
-        room.setArea(roomForm.getArea());
-        room.setPrice(roomForm.getPrice());
-        room.setBeds(roomForm.getBeds());
-        room.setBaths(roomForm.getBaths());
-        room.setCity(roomForm.getCity());
-        room.setAddress(roomForm.getAddress());
+        Room room = RoomForm.extract(roomForm);
 
         MultipartFile[] multipartFiles = roomForm.getFiles();
         for (MultipartFile multipartFile : multipartFiles) {
@@ -90,18 +79,8 @@ public class RoomRestController {
         if (!roomOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        Room room = new Room();
-        if (roomForm.getId() != null) {
-            room.setId(roomForm.getId());
-        }
-        room.setCategory(roomForm.getCategory());
-        room.setHost(roomForm.getHost());
-        room.setArea(roomForm.getArea());
-        room.setPrice(roomForm.getPrice());
-        room.setBeds(roomForm.getBeds());
-        room.setBaths(roomForm.getBaths());
-        room.setCity(roomForm.getCity());
-        room.setAddress(roomForm.getAddress());
+
+        Room room = RoomForm.extract(roomForm);
 
         MultipartFile[] multipartFiles = roomForm.getFiles();
         for (MultipartFile multipartFile : multipartFiles) {
@@ -137,16 +116,16 @@ public class RoomRestController {
                                       @RequestParam(name = "bathsRoom", required = false) String bathsRoom,
                                       @PageableDefault(size = 3) Pageable pageable) {
 
-        Page<Room> rooms = null;
+        Page<Room> rooms;
         if (cityId == null || cityId.equals("") ||
                 categoryId == null || categoryId.equals("")
-                || minAreaRoom == null || maxAreaRoom==null
+                || minAreaRoom == null || maxAreaRoom == null
                 || bedsRoom == null || bedsRoom.equals("")
-                || minPriceRoom == null || maxPriceRoom == null||
+                || minPriceRoom == null || maxPriceRoom == null ||
                 bathsRoom == null || bathsRoom.equals("")) {
             rooms = roomService.findAll(pageable);
         } else {
-            rooms = roomService.find_room(cityId, categoryId, minAreaRoom, maxAreaRoom, bedsRoom, minPriceRoom, maxPriceRoom,bathsRoom,pageable);
+            rooms = roomService.find_room(cityId, categoryId, minAreaRoom, maxAreaRoom, bedsRoom, minPriceRoom, maxPriceRoom, bathsRoom, pageable);
         }
 
         return new ResponseEntity<>(rooms, HttpStatus.OK);

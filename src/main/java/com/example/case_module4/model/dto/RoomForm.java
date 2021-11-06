@@ -2,6 +2,7 @@ package com.example.case_module4.model.dto;
 
 import com.example.case_module4.model.Category;
 import com.example.case_module4.model.City;
+import com.example.case_module4.model.Room;
 import com.example.case_module4.model.User;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,11 +27,24 @@ public class RoomForm {
 
     private String address;
 
-    private double avgRating;
-
     private boolean isAvailable;
 
     private MultipartFile[] files;
 
-
+    public static Room extract(RoomForm roomForm) {
+        Room room = new Room();
+        if (roomForm.getId() != null) {
+            room.setId(roomForm.getId());
+        }
+        room.setCategory(roomForm.getCategory());
+        room.setHost(roomForm.getHost());
+        room.setArea(roomForm.getArea());
+        room.setPrice(roomForm.getPrice());
+        room.setBeds(roomForm.getBeds());
+        room.setBaths(roomForm.getBaths());
+        room.setCity(roomForm.getCity());
+        room.setAddress(roomForm.getAddress());
+        room.setIsAvailable(roomForm.isAvailable());
+        return room;
+    }
 }
