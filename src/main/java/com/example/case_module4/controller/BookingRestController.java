@@ -2,6 +2,7 @@ package com.example.case_module4.controller;
 
 import com.example.case_module4.model.Booking;
 import com.example.case_module4.service.booking.IBookingService;
+import com.example.case_module4.service.room.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @RestController
@@ -17,6 +19,9 @@ import java.util.Optional;
 public class BookingRestController {
     @Autowired
     private IBookingService bookingService;
+
+    @Autowired
+    private IRoomService roomService;
 
     @GetMapping
     public ResponseEntity<Page<Booking>> findAll(Pageable pageable) {
@@ -35,14 +40,20 @@ public class BookingRestController {
 
     @PostMapping
     public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
-        return new ResponseEntity<>(bookingService.save(booking), HttpStatus.CREATED);
+        Booking newBooking = bookingService.save(booking);
+        booking.getRoom().setIsAvailable(
+                !LocalDate.now().isAfter(booking.getCheckIn()) || !LocalDate.now().isBefore(booking.getCheckOut()));
+        return new ResponseEntity<>(newBooking, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Booking> updateBooking(@PathVariable Long id,
                                                  @RequestBody Booking booking) {
         booking.setId(id);
-        return new ResponseEntity<>(bookingService.save(booking), HttpStatus.OK);
+        Booking newBooking = bookingService.save(booking);
+        booking.getRoom().setIsAvailable(
+                !LocalDate.now().isAfter(booking.getCheckIn()) || !LocalDate.now().isBefore(booking.getCheckOut()));
+        return new ResponseEntity<>(newBooking, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
