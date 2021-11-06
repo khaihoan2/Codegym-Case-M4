@@ -3,7 +3,7 @@ package com.example.case_module4.controller;
 import com.example.case_module4.model.Room;
 import com.example.case_module4.model.UploadingFile;
 import com.example.case_module4.model.dto.RoomForm;
-import com.example.case_module4.service.image.IUploadingFileService;
+import com.example.case_module4.service.uploading_file.IUploadingFileService;
 import com.example.case_module4.service.room.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

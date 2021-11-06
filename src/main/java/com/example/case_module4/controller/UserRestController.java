@@ -5,7 +5,7 @@ import com.example.case_module4.model.Review;
 import com.example.case_module4.model.UploadingFile;
 import com.example.case_module4.model.User;
 import com.example.case_module4.model.dto.UserForm;
-import com.example.case_module4.service.image.IUploadingFileService;
+import com.example.case_module4.service.uploading_file.IUploadingFileService;
 import com.example.case_module4.service.review.IReviewService;
 import com.example.case_module4.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,17 +67,7 @@ public class UserRestController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody UserForm userForm) {
-        User user = new User();
-        if (userForm.getId() != null) {
-            user.setId(userForm.getId());
-        }
-        user.setName(userForm.getName());
-        user.setPhone(userForm.getPhone());
-        user.setEmail(userForm.getEmail());
-        user.setUsername(userForm.getUsername());
-        user.setPassword(userForm.getPassword());
-        user.setAddress(userForm.getAddress());
-        user.setRoles(userForm.getRoles());
+        User user = UserForm.extract(userForm);
 
         MultipartFile uploadingFile = userForm.getImage();
         String fileName = uploadingFile.getOriginalFilename() + System.currentTimeMillis();
@@ -97,17 +87,7 @@ public class UserRestController {
         Optional<User> userOptional = userService.findById(id);
         if (!userOptional.isPresent()) throw new NotFoundException();
 
-        User user = new User();
-        if (userForm.getId() != null) {
-            user.setId(userForm.getId());
-        }
-        user.setName(userForm.getName());
-        user.setPhone(userForm.getPhone());
-        user.setEmail(userForm.getEmail());
-        user.setUsername(userForm.getUsername());
-        user.setPassword(userForm.getPassword());
-        user.setAddress(userForm.getAddress());
-        user.setRoles(userForm.getRoles());
+        User user = UserForm.extract(userForm);
 
         MultipartFile image = userForm.getImage();
         String imageName = image.getOriginalFilename() + System.currentTimeMillis();

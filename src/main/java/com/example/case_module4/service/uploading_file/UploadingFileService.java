@@ -1,4 +1,4 @@
-package com.example.case_module4.service.image;
+package com.example.case_module4.service.uploading_file;
 
 import com.example.case_module4.model.UploadingFile;
 import com.example.case_module4.model.User;
