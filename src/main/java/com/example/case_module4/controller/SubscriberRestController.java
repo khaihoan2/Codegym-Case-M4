@@ -3,6 +3,9 @@ package com.example.case_module4.controller;
 import com.example.case_module4.model.Subscriber;
 import com.example.case_module4.service.subscriber.ISubscriberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/subscriber")
+@RequestMapping("/api/subscribers")
 @CrossOrigin("*")
 public class SubscriberRestController {
     @Autowired
@@ -18,8 +21,8 @@ public class SubscriberRestController {
 
 
     @GetMapping
-    public ResponseEntity<Iterable<Subscriber>> showListAll() {
-        Iterable<Subscriber> subscribers = subscriberService.findAll();
+    public ResponseEntity<Page<Subscriber>> showListAll(@PageableDefault(size = 3) Pageable pageable) {
+        Page<Subscriber> subscribers = subscriberService.findAll(pageable);
         return new ResponseEntity<>(subscribers, HttpStatus.OK);
     }
 
@@ -59,7 +62,7 @@ public class SubscriberRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             subscriberService.deleteById(id);
-            return new ResponseEntity<>(subscriberOptional.get(),HttpStatus.OK);
+            return new ResponseEntity<>(subscriberOptional.get(), HttpStatus.OK);
         }
     }
 }
