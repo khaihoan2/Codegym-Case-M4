@@ -8,7 +8,6 @@ order by avgRating desc;
 
 select * from find_room_by_avg_rating
 
-
 DELIMITER //
 create procedure find_room(
     IN cityId VARCHAR(50),
@@ -24,16 +23,15 @@ create procedure find_room(
 begin
     select *
     from room r
-    where area  between minAreaRoom and maxAreaRoom
-      and cityId IN (city_id,'')
-      and categoryId IN (category_id,'')
-      and bedsRoom In (beds,'')
-      and bathsRoom IN (baths,'')
+    where area between minAreaRoom and maxAreaRoom
+      and cityId IN (city_id, '')
+      and categoryId IN (category_id, '')
+      and bedsRoom In (beds, '')
+      and bathsRoom IN (baths, '')
       and price between minPriceRoom and maxPriceRoom
+    and is_available = true
     limit size offset position;
 end //
 delimiter ;
-
-drop procedure find_room;
 
 call find_room('', '', 10, 30, '', 500, 2000, '', 2, 0);
