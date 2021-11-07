@@ -10,4 +10,7 @@ import java.util.Optional;
 @Repository
 public interface IUploadingFileRepository extends JpaRepository<UploadingFile, Long> {
     Optional<UploadingFile> findByUser(User user);
+
+    Iterable<UploadingFile> findByRoomId(Long id);
+
 }

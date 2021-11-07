@@ -38,4 +38,9 @@ public class UploadingFileService implements IUploadingFileService {
     public Optional<UploadingFile> findByUser(User user) {
         return uploadingFileRepository.findByUser(user);
     }
+
+    @Override
+    public Iterable<UploadingFile> findByRoomId(Long id) {
+        return uploadingFileRepository.findByRoomId(id);
+    }
 }

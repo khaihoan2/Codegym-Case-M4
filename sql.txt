@@ -7,3 +7,33 @@ group by r.id
 order by avgRating desc;
 
 select * from find_room_by_avg_rating
+
+
+DELIMITER //
+create procedure find_room(
+    IN cityId VARCHAR(50),
+    IN categoryId VARCHAR(50),
+    IN minAreaRoom DOUBLE,
+    IN maxAreaRoom DOUBLE,
+    IN bedsRoom VARCHAR(50),
+    IN minPriceRoom DOUBLE,
+    IN maxPriceRoom DOUBLE,
+    IN bathsRoom VARCHAR(50),
+    IN size int,
+    IN position int)
+begin
+    select *
+    from room r
+    where area  between minAreaRoom and maxAreaRoom
+      and cityId IN (city_id,'')
+      and categoryId IN (category_id,'')
+      and bedsRoom In (beds,'')
+      and bathsRoom IN (baths,'')
+      and price between minPriceRoom and maxPriceRoom
+    limit size offset position;
+end //
+delimiter ;
+
+drop procedure find_room;
+
+call find_room('', '', 10, 30, '', 500, 2000, '', 2, 0);

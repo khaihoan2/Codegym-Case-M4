@@ -1,5 +1,6 @@
 package com.example.case_module4.service.review;
 
+import com.example.case_module4.model.IAvgReviewAndCount;
 import com.example.case_module4.model.Review;
 import com.example.case_module4.repository.IReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class ReviewService implements IReviewService {
 
     @Override
     public Long avgReview(Long id) {
-        return null;
+        return reviewRepository.avgReview(id);
+    }
+
+    @Override
+    public IAvgReviewAndCount avgReviewAndCount(Long id) {
+        return reviewRepository.avgReviewAndCount(id);
     }
 }

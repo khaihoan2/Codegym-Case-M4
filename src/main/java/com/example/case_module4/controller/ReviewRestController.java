@@ -1,5 +1,6 @@
 package com.example.case_module4.controller;
 
+import com.example.case_module4.model.IAvgReviewAndCount;
 import com.example.case_module4.model.Review;
 import com.example.case_module4.service.JwtService;
 import com.example.case_module4.service.review.IReviewService;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/reviews")
+@CrossOrigin("*")
 public class ReviewRestController {
 
     @Autowired
@@ -34,6 +36,12 @@ public class ReviewRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(reviewOptional.get(), HttpStatus.OK);
+    }
+
+    @GetMapping("/rating/{id}")
+    public ResponseEntity<IAvgReviewAndCount> avgReview(@PathVariable Long id) {
+        IAvgReviewAndCount avgReviewAndCount = reviewService.avgReviewAndCount(id);
+        return new ResponseEntity<>(avgReviewAndCount, HttpStatus.OK);
     }
 
     @PostMapping

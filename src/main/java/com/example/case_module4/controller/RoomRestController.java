@@ -9,6 +9,7 @@ import com.example.case_module4.service.room.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -40,11 +41,12 @@ public class RoomRestController {
 //    @Autowired
 //    private ICategoryService categoryService;
 
-    @GetMapping()
-    public ResponseEntity<Iterable<Room>> showAllRoom() {
-        Iterable<Room> rooms = roomService.findAll();
-        return new ResponseEntity<>(rooms, HttpStatus.OK);
-    }
+
+//    @GetMapping()
+//    public ResponseEntity<?> showAllRoom() {
+//        Iterable<Room> rooms = roomService.findAll();
+//        return new ResponseEntity<>(rooms, HttpStatus.OK);
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Room> getRoom(@PathVariable Long id) {
@@ -70,8 +72,6 @@ public class RoomRestController {
         room.setBaths(roomForm.getBaths());
         room.setCity(roomForm.getCity());
         room.setAddress(roomForm.getAddress());
-//        room.setAvgRating(roomForm.getAvgRating());
-//        room.setAvailable(roomForm.isAvailable());
 
         MultipartFile[] multipartFiles = roomForm.getFiles();
         for (MultipartFile multipartFile : multipartFiles) {
@@ -88,13 +88,35 @@ public class RoomRestController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Room> editRoom(@PathVariable Long id,
-                                         @RequestBody RoomForm roomForm) {
+                                         @RequestBody RoomForm roomForm) throws IOException {
         Optional<Room> roomOptional = roomService.findById(id);
         if (!roomOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        roomForm.setId(id);
-        return createRoom(roomForm);
+        Room room = new Room();
+        if (roomForm.getId() != null) {
+            room.setId(roomForm.getId());
+        }
+        room.setCategory(roomForm.getCategory());
+        room.setHost(roomForm.getHost());
+        room.setArea(roomForm.getArea());
+        room.setPrice(roomForm.getPrice());
+        room.setBeds(roomForm.getBeds());
+        room.setBaths(roomForm.getBaths());
+        room.setCity(roomForm.getCity());
+        room.setAddress(roomForm.getAddress());
+
+        MultipartFile[] multipartFiles = roomForm.getFiles();
+        for (MultipartFile multipartFile : multipartFiles) {
+            String fileName = multipartFile.getOriginalFilename();
+            FileCopyUtils.copy(multipartFile.getBytes(), new File(fileUpload + fileName));
+            UploadingFile uploadingFile = new UploadingFile();
+            uploadingFile.setName(fileName);
+            uploadingFile.setRoom(room);
+            uploadingFileService.save(uploadingFile);
+        }
+        roomService.save(room);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -111,5 +133,37 @@ public class RoomRestController {
     public ResponseEntity<Page<IRoomRating>> findRomeRating(@PageableDefault(size = 10) Pageable pageable){
         Page<IRoomRating> roomRatings = roomService.findRoomRating(pageable);
         return new ResponseEntity<>(roomRatings, HttpStatus.OK);
+    }
+
+    @GetMapping("/findRoom")
+    public ResponseEntity<?> findRoom(@RequestParam(name = "cityId", required = false) Long cityId,
+                                      @RequestParam(name = "categoryId", required = false) Long categoryId,
+                                      @RequestParam(name = "minAreaRoom", required = false) Double minAreaRoom,
+                                      @RequestParam(name = "maxAreaRoom", required = false) Double maxAreaRoom,
+                                      @RequestParam(name = "bedsRoom", required = false) Long bedsRoom,
+                                      @RequestParam(name = "minPriceRoom", required = false) Double minPriceRoom,
+                                      @RequestParam(name = "maxPriceRoom", required = false) Double maxPriceRoom,
+                                      @RequestParam(name = "bathsRoom", required = false) Long bathsRoom,
+                                      @RequestParam(name = "page", required = false) int page) {
+        int size = 2;
+        String city = "";
+        if (cityId != null) {
+            city = String.valueOf(cityId);
+        }
+        String category = "";
+        if (categoryId != null) {
+            category = String.valueOf(categoryId);
+        }
+        String beds = "";
+        if (bedsRoom != null) {
+            beds = String.valueOf(bedsRoom);
+        }
+        String baths = "";
+        if (bathsRoom != null) {
+            baths = String.valueOf(bathsRoom);
+        }
+        int position = page * size;
+        Iterable<Room> rooms =  roomService.findRoom(city, category, minAreaRoom, maxAreaRoom, beds, minPriceRoom, maxPriceRoom, baths, size, position);
+        return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 }

@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/images")
+@CrossOrigin("*")
 public class UploadingFileRestController {
 
     @Autowired
@@ -31,6 +32,12 @@ public class UploadingFileRestController {
         } else {
             return new ResponseEntity<>(HttpStatus.OK);
         }
+    }
+
+    @GetMapping("/room/{id}")
+    public ResponseEntity<Iterable<UploadingFile>> findByRoomId(@PathVariable Long id) {
+        Iterable<UploadingFile> files = uploadingFileService.findByRoomId(id);
+        return new ResponseEntity<>(files, HttpStatus.OK);
     }
 
     @PostMapping

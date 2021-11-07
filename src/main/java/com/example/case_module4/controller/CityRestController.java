@@ -24,6 +24,7 @@ public class CityRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<City> findById(@PathVariable Long id) {
+
         Optional<City> city = cityService.findById(id);
         return new ResponseEntity<>(city.get(), HttpStatus.OK);
     }

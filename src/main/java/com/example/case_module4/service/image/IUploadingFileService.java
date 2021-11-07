@@ -8,4 +8,7 @@ import java.util.Optional;
 
 public interface IUploadingFileService extends IGeneralService<UploadingFile> {
     Optional<UploadingFile> findByUser(User user);
+
+    Iterable<UploadingFile> findByRoomId(Long id);
+
 }
