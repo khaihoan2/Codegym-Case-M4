@@ -13,4 +13,6 @@ public interface IUploadingFileRepository extends JpaRepository<UploadingFile, L
 
     Iterable<UploadingFile> findByRoomId(Long id);
 
+    Iterable<UploadingFile> findByUserId(Long id);
+
 }

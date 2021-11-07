@@ -11,4 +11,6 @@ public interface IUploadingFileService extends IGeneralService<UploadingFile> {
 
     Iterable<UploadingFile> findByRoomId(Long id);
 
+    Iterable<UploadingFile> findByUserId(Long id);
+
 }

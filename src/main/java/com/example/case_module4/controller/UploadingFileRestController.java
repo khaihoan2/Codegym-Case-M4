@@ -40,6 +40,12 @@ public class UploadingFileRestController {
         return new ResponseEntity<>(files, HttpStatus.OK);
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<Iterable<UploadingFile>> findByUserId(@PathVariable Long id) {
+        Iterable<UploadingFile> files = uploadingFileService.findByUserId(id);
+        return new ResponseEntity<>(files, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<UploadingFile> createImage(@RequestBody UploadingFile uploadingFile) {
         return new ResponseEntity<>(uploadingFileService.save(uploadingFile), HttpStatus.CREATED);
