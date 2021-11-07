@@ -1,6 +1,7 @@
 package com.example.case_module4.controller;
 
 
+import com.example.case_module4.model.Image;
 import com.example.case_module4.model.UploadingFile;
 import com.example.case_module4.service.image.IUploadingFileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,9 @@ public class UploadingFileRestController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<Iterable<UploadingFile>> findByUserId(@PathVariable Long id) {
-        Iterable<UploadingFile> files = uploadingFileService.findByUserId(id);
-        return new ResponseEntity<>(files, HttpStatus.OK);
+    public ResponseEntity<Image> findByUserId(@PathVariable Long id) {
+        Image image = uploadingFileService.findByUserId(id);
+        return new ResponseEntity<>(image, HttpStatus.OK);
     }
 
     @PostMapping

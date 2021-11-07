@@ -1,5 +1,6 @@
 package com.example.case_module4.service.image;
 
+import com.example.case_module4.model.Image;
 import com.example.case_module4.model.UploadingFile;
 import com.example.case_module4.model.User;
 import com.example.case_module4.service.IGeneralService;
@@ -11,6 +12,6 @@ public interface IUploadingFileService extends IGeneralService<UploadingFile> {
 
     Iterable<UploadingFile> findByRoomId(Long id);
 
-    Iterable<UploadingFile> findByUserId(Long id);
+    Image findByUserId(Long id);
 
 }

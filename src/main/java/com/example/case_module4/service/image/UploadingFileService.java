@@ -1,5 +1,6 @@
 package com.example.case_module4.service.image;
 
+import com.example.case_module4.model.Image;
 import com.example.case_module4.model.UploadingFile;
 import com.example.case_module4.model.User;
 import com.example.case_module4.repository.IUploadingFileRepository;
@@ -45,7 +46,14 @@ public class UploadingFileService implements IUploadingFileService {
     }
 
     @Override
-    public Iterable<UploadingFile> findByUserId(Long id) {
-        return uploadingFileRepository.findByUserId(id);
+    public Image findByUserId(Long id) {
+        Iterable<UploadingFile> uploadingFiles = uploadingFileRepository.findByUserId(id);
+        Image imageOne = new Image();
+        for (UploadingFile uploadingFile : uploadingFiles) {
+            imageOne.setId(uploadingFile.getId());
+            imageOne.setName(uploadingFile.getName());
+            break;
+        }
+        return imageOne;
     }
 }
