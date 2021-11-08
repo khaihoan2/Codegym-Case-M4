@@ -4,7 +4,6 @@ import com.example.case_module4.model.IRoomRating;
 import com.example.case_module4.model.Category;
 import com.example.case_module4.model.City;
 import com.example.case_module4.model.Room;
-import com.example.case_module4.model.User;
 import com.example.case_module4.service.IGeneralService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +18,5 @@ public interface IRoomService extends IGeneralService<Room> {
 
    Iterable<Room> findAllByCity(City city);
 
-   Page<Room>  find_room(String nameCity, String nameCategory, Double minAreaRoom,Double maxAreaRoom, String bedsRoom, Double minPriceRoom, Double maxPriceRoom, String bathsRoom, Pageable pageable);
    Iterable<Room> findRoom(String nameCity, String nameCategory, Double minAreaRoom, Double maxAreaRoom, String bedsRoom, Double minPriceRoom, Double maxPriceRoom, String bathsRoom, int size, int position);
 }

@@ -27,14 +27,14 @@ public class RoomService implements IRoomService {
 
     @Override
     public Iterable<Room> findAll() {
-        Iterable<Room> rooms = roomRepository.findAll();
-        for (Room room : rooms) {
-            Boolean isAvailable = bookingService.checkRoomAvailable(room.getId());
-            Long avgId = reviewService.avgReview(room.getId());
-//            room.setAvgRating(avgId);
-            room.setIsAvailable(isAvailable);
-        }
-        return roomRepository.findAll();
+//        Iterable<Room> rooms = roomRepository.findAll();
+//        for (Room room : rooms) {
+//            Long avgId = reviewService.avgReview(room.getId());
+////            room.setAvgRating(avgId);
+//            room.setIsAvailable(isAvailable);
+//        }
+//        return roomRepository.findAll();
+        return null;
     }
 
     @Override
@@ -76,6 +76,4 @@ public class RoomService implements IRoomService {
     public Iterable<Room> findRoom(String nameCity, String nameCategory, Double minAreaRoom, Double maxAreaRoom, String bedsRoom, Double minPriceRoom, Double maxPriceRoom, String bathsRoom, int size, int position) {
         return roomRepository.find_room(nameCity,nameCategory,minAreaRoom,maxAreaRoom,bedsRoom,minPriceRoom,maxPriceRoom,bathsRoom, size, position);
     }
-
-
 }

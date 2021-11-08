@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface IBookingService extends IGeneralService<Booking> {
-     boolean checkRoomAvailable(Long id);
+
     Page<Booking> findAllByGuest(User guest, Pageable pageable);
 
     Page<Booking> findAll(Pageable pageable);
