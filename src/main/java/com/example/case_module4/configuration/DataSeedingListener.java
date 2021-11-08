@@ -72,5 +72,53 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         if (categoryRepository.findByName(CategoryName.CATEGORY_APARTMENT) == null) {
             categoryRepository.save(new Category(CategoryName.CATEGORY_APARTMENT));
         }
+
+        // Default administrator
+        if (!userRepository.findByUsername("admin").isPresent()) {
+            User user = new User();
+            user.setName("admin");
+            user.setPhone("0907128338");
+            user.setEmail("admin@gmail.com");
+            user.setUsername("admin");
+            user.setPassword(passwordEncoder.encode("admin"));
+            user.setAddress("on the Mars");
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleRepository.findByName(RoleName.ROLE_ADMIN));
+            roles.add(roleRepository.findByName(RoleName.ROLE_SELLER));
+            roles.add(roleRepository.findByName(RoleName.ROLE_USER));
+            user.setRoles(roles);
+            userRepository.save(user);
+        }
+
+        //Default seller
+        if (!userRepository.findByUsername("seller").isPresent()) {
+            User user = new User();
+            user.setName("seller");
+            user.setPhone("0396520067");
+            user.setEmail("seller@gmail.com");
+            user.setUsername("seller");
+            user.setPassword(passwordEncoder.encode("seller"));
+            user.setAddress("on the Jupiter");
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleRepository.findByName(RoleName.ROLE_SELLER));
+            roles.add(roleRepository.findByName(RoleName.ROLE_USER));
+            user.setRoles(roles);
+            userRepository.save(user);
+        }
+
+        //Default user
+        if (!userRepository.findByUsername("user").isPresent()) {
+            User user = new User();
+            user.setName("user");
+            user.setPhone("19001798");
+            user.setEmail("user@gmail.com");
+            user.setUsername("user");
+            user.setPassword(passwordEncoder.encode("user"));
+            user.setAddress("on the Moon");
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleRepository.findByName(RoleName.ROLE_USER));
+            user.setRoles(roles);
+            userRepository.save(user);
+        }
     }
 }

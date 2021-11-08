@@ -47,8 +47,7 @@ public class ReviewService implements IReviewService {
     }
 
     @Override
-    public Optional<Review> findByUser(User user) {
-        return null;
+    public Iterable<Review> findByAuthor(User author) {
+        return reviewRepository.findByAuthor(author);
     }
-
 }
