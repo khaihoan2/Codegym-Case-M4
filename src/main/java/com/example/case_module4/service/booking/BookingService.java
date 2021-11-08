@@ -87,10 +87,4 @@ public class BookingService implements IBookingService {
         booking.setCheckOut(checkOut);
         return bookingRepository.save(booking);
     }
-
-    @Override
-    public boolean checkRoomAvailable(Long id) {
-        bookingRepository.checkRoomAvailable(id);
-        return true;
-    }
 }

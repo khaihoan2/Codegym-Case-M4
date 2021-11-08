@@ -145,7 +145,7 @@ public class RoomRestController {
                                       @RequestParam(name = "maxPriceRoom", required = false) Double maxPriceRoom,
                                       @RequestParam(name = "bathsRoom", required = false) Long bathsRoom,
                                       @RequestParam(name = "page", required = false) int page) {
-        int size = 2;
+        int size = 6;
         String city = "";
         if (cityId != null) {
             city = String.valueOf(cityId);

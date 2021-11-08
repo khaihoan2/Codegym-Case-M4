@@ -23,16 +23,10 @@ public class RoomService implements IRoomService {
     @Autowired
     private IBookingService bookingService;
 
+
     @Override
     public Iterable<Room> findAll() {
-        Iterable<Room> rooms = roomRepository.findAll();
-        for (Room room : rooms) {
-            Boolean isAvailable = bookingService.checkRoomAvailable(room.getId());
-            Long avgId = reviewService.avgReview(room.getId());
-//            room.setAvgRating(avgId);
-            room.setIsAvailable(isAvailable);
-        }
-        return roomRepository.findAll();
+        return null;
     }
 
     @Override

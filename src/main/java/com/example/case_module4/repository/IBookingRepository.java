@@ -11,8 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IBookingRepository extends JpaRepository<Booking, Long> {
     Page<Booking> findAllByGuest(User guest, Pageable pageable);
-    @Query(value = "call checkRoomAvailable(?1)",nativeQuery = true)
-    Long checkRoomAvailable(Long id);
 
     @Override
     Page<Booking> findAll(Pageable pageable);

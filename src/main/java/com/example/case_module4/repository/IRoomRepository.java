@@ -13,6 +13,7 @@ public interface IRoomRepository extends JpaRepository<Room,Long> {
 
     @Query(value = "select * from find_room_by_avg_rating", nativeQuery = true)
     Page<IRoomRating> findRoomRating(Pageable pageable);
+
     Page<Room> findAll(Pageable pageable);
 
     @Query(value = "call find_room(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)",nativeQuery = true)
