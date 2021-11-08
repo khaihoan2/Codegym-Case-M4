@@ -6,7 +6,7 @@ import com.example.case_module4.model.User;
 import com.example.case_module4.model.dto.JwtResponse;
 import com.example.case_module4.model.dto.UserForm;
 import com.example.case_module4.service.JwtService;
-import com.example.case_module4.service.image.IUploadingFileService;
+import com.example.case_module4.service.uploading_file.IUploadingFileService;
 import com.example.case_module4.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

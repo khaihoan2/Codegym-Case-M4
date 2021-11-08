@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/utility")
+@RequestMapping("/api/utilities")
+@CrossOrigin("*")
 public class UtilityRestController {
     @Autowired
     private IUtilityService utilityService;

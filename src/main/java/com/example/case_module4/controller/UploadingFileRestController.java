@@ -3,7 +3,7 @@ package com.example.case_module4.controller;
 
 import com.example.case_module4.model.Image;
 import com.example.case_module4.model.UploadingFile;
-import com.example.case_module4.service.image.IUploadingFileService;
+import com.example.case_module4.service.uploading_file.IUploadingFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/images")
+@RequestMapping("/api/uploading-files")
 @CrossOrigin("*")
 public class UploadingFileRestController {
 

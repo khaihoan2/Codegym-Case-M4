@@ -3,6 +3,8 @@ package com.example.case_module4.service.subscriber;
 import com.example.case_module4.model.Subscriber;
 import com.example.case_module4.repository.ISubscriberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -31,5 +33,10 @@ public class SubscriberService implements ISubscriberService{
     @Override
     public void deleteById(Long id) {
         subscriberRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Subscriber> findAll(Pageable pageable) {
+        return subscriberRepository.findAll(pageable);
     }
 }

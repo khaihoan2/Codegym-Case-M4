@@ -4,8 +4,8 @@ import com.example.case_module4.model.IRoomRating;
 import com.example.case_module4.model.Room;
 import com.example.case_module4.model.UploadingFile;
 import com.example.case_module4.model.dto.RoomForm;
-import com.example.case_module4.service.image.IUploadingFileService;
 import com.example.case_module4.service.room.IRoomService;
+import com.example.case_module4.service.uploading_file.IUploadingFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -93,18 +93,8 @@ public class RoomRestController {
         if (!roomOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        Room room = new Room();
-        if (roomForm.getId() != null) {
-            room.setId(roomForm.getId());
-        }
-        room.setCategory(roomForm.getCategory());
-        room.setHost(roomForm.getHost());
-        room.setArea(roomForm.getArea());
-        room.setPrice(roomForm.getPrice());
-        room.setBeds(roomForm.getBeds());
-        room.setBaths(roomForm.getBaths());
-        room.setCity(roomForm.getCity());
-        room.setAddress(roomForm.getAddress());
+
+        Room room = RoomForm.extract(roomForm);
 
         MultipartFile[] multipartFiles = roomForm.getFiles();
         for (MultipartFile multipartFile : multipartFiles) {

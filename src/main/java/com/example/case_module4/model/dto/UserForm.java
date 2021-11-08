@@ -1,6 +1,7 @@
 package com.example.case_module4.model.dto;
 
 import com.example.case_module4.model.Role;
+import com.example.case_module4.model.User;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,5 +28,20 @@ public class UserForm {
     private MultipartFile image;
 
     public UserForm() {
+    }
+
+    public static User extract(UserForm userForm) {
+        User user = new User();
+        if (userForm.getId() != null) {
+            user.setId(userForm.getId());
+        }
+        user.setName(userForm.getName());
+        user.setPhone(userForm.getPhone());
+        user.setEmail(userForm.getEmail());
+        user.setUsername(userForm.getUsername());
+        user.setPassword(userForm.getPassword());
+        user.setAddress(userForm.getAddress());
+        user.setRoles(userForm.getRoles());
+        return user;
     }
 }
