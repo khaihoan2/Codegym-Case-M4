@@ -1,0 +1,37 @@
+create view find_room_by_avg_rating as
+select r.id, r.price , r.address, r.area, r.baths, r.beds, r.is_available isAvailable, r.category_id categoryId, r.city_id cityId, r.host_user_id hostUserId, avg(r2.rating) as avgRating
+from room r
+inner join review r2 on r.id = r2.room_id
+where r.is_available = true
+group by r.id
+order by avgRating desc;
+
+select * from find_room_by_avg_rating
+
+DELIMITER //
+create procedure find_room(
+    IN cityId VARCHAR(50),
+    IN categoryId VARCHAR(50),
+    IN minAreaRoom DOUBLE,
+    IN maxAreaRoom DOUBLE,
+    IN bedsRoom VARCHAR(50),
+    IN minPriceRoom DOUBLE,
+    IN maxPriceRoom DOUBLE,
+    IN bathsRoom VARCHAR(50),
+    IN size int,
+    IN position int)
+begin
+    select *
+    from room r
+    where area between minAreaRoom and maxAreaRoom
+      and cityId IN (city_id, '')
+      and categoryId IN (category_id, '')
+      and bedsRoom In (beds, '')
+      and bathsRoom IN (baths, '')
+      and price between minPriceRoom and maxPriceRoom
+    and is_available = true
+    limit size offset position;
+end //
+delimiter ;
+
+call find_room('', '', 10, 30, '', 500, 2000, '', 2, 0);

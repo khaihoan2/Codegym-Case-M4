@@ -2,6 +2,7 @@ package com.example.case_module4.service.room;
 
 import com.example.case_module4.model.Category;
 import com.example.case_module4.model.City;
+import com.example.case_module4.model.IRoomRating;
 import com.example.case_module4.model.Room;
 import com.example.case_module4.repository.IRoomRepository;
 import com.example.case_module4.service.booking.IBookingService;
@@ -52,6 +53,11 @@ public class RoomService implements IRoomService {
     }
 
     @Override
+    public Page<IRoomRating> findRoomRating(Pageable pageable) {
+        return roomRepository.findRoomRating(pageable);
+    }
+
+    @Override
     public Page<Room> findAll(Pageable pageable) {
         return roomRepository.findAll(pageable);
     }
@@ -67,8 +73,8 @@ public class RoomService implements IRoomService {
     }
 
     @Override
-    public Page<Room> find_room(String nameCity, String nameCategory, Double minAreaRoom, Double maxAreaRoom, String bedsRoom, Double minPriceRoom, Double maxPriceRoom, String bathsRoom, Pageable pageable) {
-        return roomRepository.find_room(nameCity,nameCategory,minAreaRoom,maxAreaRoom,bedsRoom,minPriceRoom,maxPriceRoom,bathsRoom,pageable);
+    public Iterable<Room> findRoom(String nameCity, String nameCategory, Double minAreaRoom, Double maxAreaRoom, String bedsRoom, Double minPriceRoom, Double maxPriceRoom, String bathsRoom, int size, int position) {
+        return roomRepository.find_room(nameCity,nameCategory,minAreaRoom,maxAreaRoom,bedsRoom,minPriceRoom,maxPriceRoom,bathsRoom, size, position);
     }
 
 

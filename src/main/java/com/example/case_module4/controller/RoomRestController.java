@@ -1,5 +1,6 @@
 package com.example.case_module4.controller;
 
+import com.example.case_module4.model.IRoomRating;
 import com.example.case_module4.model.Room;
 import com.example.case_module4.model.UploadingFile;
 import com.example.case_module4.model.dto.RoomForm;
@@ -8,6 +9,7 @@ import com.example.case_module4.service.uploading_file.IUploadingFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/rooms")
+@CrossOrigin("*")
 public class RoomRestController {
 
 
@@ -105,29 +108,41 @@ public class RoomRestController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/rating")
+    public ResponseEntity<Page<IRoomRating>> findRomeRating(@PageableDefault(size = 10) Pageable pageable){
+        Page<IRoomRating> roomRatings = roomService.findRoomRating(pageable);
+        return new ResponseEntity<>(roomRatings, HttpStatus.OK);
+    }
+
     @GetMapping("/findRoom")
-    public ResponseEntity<?> findRoom(@RequestParam(name = "cityId") String cityId,
-                                      @RequestParam(name = "categoryId") String categoryId,
-                                      @RequestParam(name = "minAreaRoom") Double minAreaRoom,
-                                      @RequestParam(name = "maxAreaRoom") Double maxAreaRoom,
-                                      @RequestParam(name = "bedsRoom") String bedsRoom,
-                                      @RequestParam(name = "minPriceRoom") Double minPriceRoom,
-                                      @RequestParam(name = "maxPriceRoom") Double maxPriceRoom,
-                                      @RequestParam(name = "bathsRoom") String bathsRoom,
-                                      @PageableDefault(size = 3) Pageable pageable) {
-
-        Page<Room> rooms;
-        if (cityId == null || cityId.equals("") ||
-                categoryId == null || categoryId.equals("")
-                || minAreaRoom == null || maxAreaRoom == null
-                || bedsRoom == null || bedsRoom.equals("")
-                || minPriceRoom == null || maxPriceRoom == null ||
-                bathsRoom == null || bathsRoom.equals("")) {
-            rooms = roomService.findAll(pageable);
-        } else {
-            rooms = roomService.find_room(cityId, categoryId, minAreaRoom, maxAreaRoom, bedsRoom, minPriceRoom, maxPriceRoom, bathsRoom, pageable);
+    public ResponseEntity<?> findRoom(@RequestParam(name = "cityId", required = false) Long cityId,
+                                      @RequestParam(name = "categoryId", required = false) Long categoryId,
+                                      @RequestParam(name = "minAreaRoom", required = false) Double minAreaRoom,
+                                      @RequestParam(name = "maxAreaRoom", required = false) Double maxAreaRoom,
+                                      @RequestParam(name = "bedsRoom", required = false) Long bedsRoom,
+                                      @RequestParam(name = "minPriceRoom", required = false) Double minPriceRoom,
+                                      @RequestParam(name = "maxPriceRoom", required = false) Double maxPriceRoom,
+                                      @RequestParam(name = "bathsRoom", required = false) Long bathsRoom,
+                                      @RequestParam(name = "page", required = false) int page) {
+        int size = 2;
+        String city = "";
+        if (cityId != null) {
+            city = String.valueOf(cityId);
         }
-
+        String category = "";
+        if (categoryId != null) {
+            category = String.valueOf(categoryId);
+        }
+        String beds = "";
+        if (bedsRoom != null) {
+            beds = String.valueOf(bedsRoom);
+        }
+        String baths = "";
+        if (bathsRoom != null) {
+            baths = String.valueOf(bathsRoom);
+        }
+        int position = page * size;
+        Iterable<Room> rooms =  roomService.findRoom(city, category, minAreaRoom, maxAreaRoom, beds, minPriceRoom, maxPriceRoom, baths, size, position);
         return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 }
