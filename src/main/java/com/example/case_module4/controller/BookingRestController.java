@@ -19,6 +19,7 @@ import javax.swing.text.html.Option;
 import java.awt.print.Book;
 import java.time.LocalDate;
 import java.sql.Date;
+import java.sql.Date;
 import java.util.Optional;
 
 @RestController
@@ -73,6 +74,13 @@ public class BookingRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Booking> removeBooking(@PathVariable Long id) {
+        Optional<Booking> bookingOptional = bookingService.findById(id);
+        if (!bookingOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Booking booking = bookingOptional.get();
+        booking.getRoom().setIsAvailable(
+                !LocalDate.now().isAfter(booking.getCheckIn()) || !LocalDate.now().isBefore(booking.getCheckOut()));
         bookingService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

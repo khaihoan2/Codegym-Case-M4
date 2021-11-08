@@ -70,7 +70,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             categoryRepository.save(new Category(CategoryName.CATEGORY_HOMESTAY));
         }
         if (categoryRepository.findByName(CategoryName.CATEGORY_APARTMENT) == null) {
-            categoryRepository.save(new Category(CategoryName.CATEGORY_HOMESTAY));
+            categoryRepository.save(new Category(CategoryName.CATEGORY_APARTMENT));
         }
 
         // Default administrator

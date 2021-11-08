@@ -13,6 +13,5 @@ public interface IReviewService extends IGeneralService<Review> {
 
     IAvgReviewAndCount avgReviewAndCount(Long id);
 
-
-    Optional<Review> findByUser(User user);
+    Iterable<Review> findByAuthor(User author);
 }

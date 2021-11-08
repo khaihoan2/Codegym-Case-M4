@@ -25,7 +25,7 @@ public class UserForm {
 
     private Collection<Role> roles;
 
-    private MultipartFile image;
+    private MultipartFile avatar;
 
     public UserForm() {
     }

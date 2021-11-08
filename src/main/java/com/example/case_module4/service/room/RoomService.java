@@ -3,6 +3,7 @@ package com.example.case_module4.service.room;
 import com.example.case_module4.model.IRoomRating;
 import com.example.case_module4.model.Category;
 import com.example.case_module4.model.City;
+import com.example.case_module4.model.IRoomRating;
 import com.example.case_module4.model.Room;
 import com.example.case_module4.repository.IRoomRepository;
 import com.example.case_module4.service.booking.IBookingService;

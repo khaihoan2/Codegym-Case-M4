@@ -16,4 +16,5 @@ public interface IReviewRepository extends JpaRepository<Review, Long> {
     IAvgReviewAndCount avgReviewAndCount(Long id);
 
 
+    Iterable<Review> findByAuthor(User author);
 }
