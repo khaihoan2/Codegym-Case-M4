@@ -106,14 +106,14 @@ public class RoomRestController {
     }
 
     @GetMapping("/findRoom")
-    public ResponseEntity<?> findRoom(@RequestParam(name = "cityId", required = false) String cityId,
-                                      @RequestParam(name = "categoryId", required = false) String categoryId,
-                                      @RequestParam(name = "minAreaRoom", required = false) Double minAreaRoom,
-                                      @RequestParam(name = "maxAreaRoom", required = false) Double maxAreaRoom,
-                                      @RequestParam(name = "bedsRoom", required = false) String bedsRoom,
-                                      @RequestParam(name = "minPriceRoom", required = false) Double minPriceRoom,
-                                      @RequestParam(name = "maxPriceRoom", required = false) Double maxPriceRoom,
-                                      @RequestParam(name = "bathsRoom", required = false) String bathsRoom,
+    public ResponseEntity<?> findRoom(@RequestParam(name = "cityId") String cityId,
+                                      @RequestParam(name = "categoryId") String categoryId,
+                                      @RequestParam(name = "minAreaRoom") Double minAreaRoom,
+                                      @RequestParam(name = "maxAreaRoom") Double maxAreaRoom,
+                                      @RequestParam(name = "bedsRoom") String bedsRoom,
+                                      @RequestParam(name = "minPriceRoom") Double minPriceRoom,
+                                      @RequestParam(name = "maxPriceRoom") Double maxPriceRoom,
+                                      @RequestParam(name = "bathsRoom") String bathsRoom,
                                       @PageableDefault(size = 3) Pageable pageable) {
 
         Page<Room> rooms;
