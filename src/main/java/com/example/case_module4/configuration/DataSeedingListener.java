@@ -1,8 +1,14 @@
 package com.example.case_module4.configuration;
 
+import com.example.case_module4.model.Category;
+import com.example.case_module4.model.City;
 import com.example.case_module4.model.Role;
 import com.example.case_module4.model.User;
+import com.example.case_module4.model.constant.CategoryName;
+import com.example.case_module4.model.constant.CityName;
 import com.example.case_module4.model.constant.RoleName;
+import com.example.case_module4.repository.ICategoryRepository;
+import com.example.case_module4.repository.ICityRepository;
 import com.example.case_module4.repository.IRoleRepository;
 import com.example.case_module4.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +30,12 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
     private IRoleRepository roleRepository;
 
     @Autowired
+    private ICityRepository cityRepository;
+
+    @Autowired
+    private ICategoryRepository categoryRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -37,6 +49,31 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         }
         if (roleRepository.findByName(RoleName.ROLE_USER) == null) {
             roleRepository.save(new Role(RoleName.ROLE_USER));
+        }
+
+        // Cities
+        if (cityRepository.findByName(CityName.CITY_HANOI) == null) {
+            cityRepository.save(new City(CityName.CITY_HANOI));
+        }
+        if (cityRepository.findByName(CityName.CITY_PARIS) == null) {
+            cityRepository.save(new City(CityName.CITY_PARIS));
+        }
+        if (cityRepository.findByName(CityName.CITY_LONDON) == null) {
+            cityRepository.save(new City(CityName.CITY_LONDON));
+        }
+
+        // Categories
+        if (categoryRepository.findByName(CategoryName.CATEGORY_CONDO) == null) {
+            categoryRepository.save(new Category(CategoryName.CATEGORY_CONDO));
+        }
+        if (categoryRepository.findByName(CategoryName.CATEGORY_VILLA) == null) {
+            categoryRepository.save(new Category(CategoryName.CATEGORY_VILLA));
+        }
+        if (categoryRepository.findByName(CategoryName.CATEGORY_HOMESTAY) == null) {
+            categoryRepository.save(new Category(CategoryName.CATEGORY_HOMESTAY));
+        }
+        if (categoryRepository.findByName(CategoryName.CATEGORY_APARTMENT) == null) {
+            categoryRepository.save(new Category(CategoryName.CATEGORY_HOMESTAY));
         }
 
         // Default administrator
