@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class RoomForm {
     private Long id;
 
+    private String name;
+
     private Category category;
 
     private User host;
@@ -36,6 +38,7 @@ public class RoomForm {
         if (roomForm.getId() != null) {
             room.setId(roomForm.getId());
         }
+        room.setName(roomForm.getName());
         room.setCategory(roomForm.getCategory());
         room.setHost(roomForm.getHost());
         room.setArea(roomForm.getArea());

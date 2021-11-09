@@ -19,6 +19,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static com.example.case_module4.model.constant.RoleName.ROLE_ADMIN;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -56,37 +58,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().ignoringAntMatchers("/**");
-//        http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
-//        http.authorizeRequests()
-//                .antMatchers("/", "/api/login", "/api/register").permitAll()
-//                .anyRequest().authenticated()
-//                .and().csrf().disable();
-//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-//                .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
-//        http.sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        http.cors();
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().ignoringAntMatchers("/**");
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
         http.authorizeRequests()
-                .antMatchers("/rest/login**").permitAll();
+                .antMatchers("/api/login", "/api/register").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/cities").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/categories").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/rooms").permitAll()
+        ;
         http.antMatcher("/api/**").httpBasic()
                 .authenticationEntryPoint(restServicesEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/rest/**")
-                .access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-                .antMatchers(HttpMethod.POST, "/rest/**")
-                .access("hasRole('ROLE_ADMIN')")
-                .antMatchers(HttpMethod.DELETE, "/rest/**")
-                .access("hasRole('ROLE_ADMIN')").and()
+
+//                .antMatchers(HttpMethod.GET, "/api/**")
+//                .access("hasRole('ROLE_ADMIN')")
+//                .antMatchers(HttpMethod.POST, "/api/**")
+//                .access("hasRole('ROLE_ADMIN')")
+//                .antMatchers(HttpMethod.PUT, "/api/**")
+//                .access("hasRole('ROLE_ADMIN')")
+//                .antMatchers(HttpMethod.DELETE, "/api/**")
+//                .access("hasRole('ROLE_ADMIN')")
+
+                .antMatchers(HttpMethod.GET, "/api/rooms/**")
+                .access("hasRole('ROLE_USER') or hasRole('ROLE_SELLER') or hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.POST, "/api/rooms**")
+                .access("hasRole('ROLE_SELLER')")
+                .antMatchers(HttpMethod.PUT, "/api/rooms**")
+                .access("hasRole('ROLE_SELLER')")
+                .antMatchers(HttpMethod.DELETE, "/api/rooms**")
+                .access("hasRole('ROLE_SELLER')")
+
+                .and()
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
     }

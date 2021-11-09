@@ -9,7 +9,6 @@ import com.example.case_module4.service.uploading_file.IUploadingFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -60,18 +59,7 @@ public class RoomRestController {
 
     @PostMapping()
     public ResponseEntity<Room> createRoom(@RequestBody RoomForm roomForm) {
-        Room room = new Room();
-        if (roomForm.getId() != null) {
-            room.setId(roomForm.getId());
-        }
-        room.setCategory(roomForm.getCategory());
-        room.setHost(roomForm.getHost());
-        room.setArea(roomForm.getArea());
-        room.setPrice(roomForm.getPrice());
-        room.setBeds(roomForm.getBeds());
-        room.setBaths(roomForm.getBaths());
-        room.setCity(roomForm.getCity());
-        room.setAddress(roomForm.getAddress());
+        Room room = RoomForm.extract(roomForm);
 
         MultipartFile[] multipartFiles = roomForm.getFiles();
         for (MultipartFile multipartFile : multipartFiles) {

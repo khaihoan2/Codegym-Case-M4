@@ -2,9 +2,12 @@ package com.example.case_module4.controller;
 
 import com.example.case_module4.exception.NotFoundException;
 import com.example.case_module4.model.Review;
+import com.example.case_module4.model.Role;
 import com.example.case_module4.model.UploadingFile;
 import com.example.case_module4.model.User;
+import com.example.case_module4.model.constant.RoleName;
 import com.example.case_module4.model.dto.UserForm;
+import com.example.case_module4.service.role.IRoleService;
 import com.example.case_module4.service.uploading_file.IUploadingFileService;
 import com.example.case_module4.service.review.IReviewService;
 import com.example.case_module4.service.user.IUserService;
@@ -20,15 +23,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin("*")
 public class UserRestController {
-
-    public static final String NO_RESULTS = "There's no results!";
 
     @Value("${file-upload}")
     private String fileUpload;
@@ -41,6 +44,9 @@ public class UserRestController {
 
     @Autowired
     private IReviewService reviewService;
+
+    @Autowired
+    private IRoleService roleService;
 
     @GetMapping
     public ResponseEntity<?> findAll(@RequestParam(name = "q", required = false)
@@ -67,15 +73,27 @@ public class UserRestController {
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody UserForm userForm) {
         User user = UserForm.extract(userForm);
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleService.findByName(RoleName.ROLE_ADMIN));
+        roles.add(roleService.findByName(RoleName.ROLE_SELLER));
+        roles.add(roleService.findByName(RoleName.ROLE_USER));
+        user.setRoles(roles);
 
-        MultipartFile uploadingFile = userForm.getAvatar();
-        String fileName = uploadingFile.getOriginalFilename() + System.currentTimeMillis();
-        try {
-            FileCopyUtils.copy(uploadingFile.getBytes(), new File(fileName));
-        } catch (IOException e) {
-            e.printStackTrace();
+        Optional<User> userCheck = userService.findByUsername(user.getUsername());
+        if (userCheck.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        uploadingFileService.save(new UploadingFile(fileName, user));
+
+        MultipartFile avatar = userForm.getAvatar();
+        if (avatar != null) {
+            String fileName = avatar.getOriginalFilename() + System.currentTimeMillis();
+            try {
+                FileCopyUtils.copy(avatar.getBytes(), new File(fileUpload + fileName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            uploadingFileService.save(new UploadingFile(fileName, user));
+        }
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 
@@ -87,15 +105,19 @@ public class UserRestController {
         if (!userOptional.isPresent()) throw new NotFoundException();
 
         User user = UserForm.extract(userForm);
+        user.setRoles(userOptional.get().getRoles());
 
-        MultipartFile image = userForm.getAvatar();
-        String imageName = image.getOriginalFilename() + System.currentTimeMillis();
-        try {
-            FileCopyUtils.copy(image.getBytes(), new File(imageName));
-        } catch (IOException e) {
-            e.printStackTrace();
+        MultipartFile avatar = userForm.getAvatar();
+        if (avatar != null) {
+            String avatarName = avatar.getOriginalFilename() + System.currentTimeMillis();
+            try {
+                FileCopyUtils.copy(avatar.getBytes(), new File(avatarName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            uploadingFileService.save(new UploadingFile(avatarName, user));
         }
-//        Delete the existing then save the new one
+        user.setId(id);
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 

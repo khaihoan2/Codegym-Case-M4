@@ -41,7 +41,6 @@ public class UserForm {
         user.setUsername(userForm.getUsername());
         user.setPassword(userForm.getPassword());
         user.setAddress(userForm.getAddress());
-        user.setRoles(userForm.getRoles());
         return user;
     }
 }
