@@ -35,3 +35,178 @@ end //
 delimiter ;
 
 call find_room('', '', 10, 30, '', 500, 2000, '', 2, 0);
+
+INSERT INTO case_module4_springboot.room (address, area, baths, beds, is_available, price, category_id, city_id,
+                                          host_user_id)
+VALUES ('My Dinh', 30, 2, 2, true, 1000, 1, 1, 2);
+
+INSERT INTO case_module4_springboot.room (address, area, baths, beds, is_available, price, category_id, city_id,
+                                          host_user_id)
+VALUES ('Cau Giay', 35, 2, 2, true, 1500, 1, 1, 4);
+
+INSERT INTO case_module4_springboot.room (address, area, baths, beds, is_available, price, category_id, city_id,
+                                          host_user_id)
+VALUES ('Hoang Mai', 25, 1, 2, true, 900, 2, 1, 2);
+
+INSERT INTO case_module4_springboot.room (address, area, baths, beds, is_available, price, category_id, city_id,
+                                          host_user_id)
+VALUES ('Hai Ba Trung', 30, 1, 3, true, 1200, 3, 1, 2);
+
+INSERT INTO case_module4_springboot.room (address, area, baths, beds, is_available, price, category_id, city_id,
+                                          host_user_id)
+VALUES ('Paris', 40, 1, 2, true, 2900, 4, 2, 2);
+
+INSERT INTO case_module4_springboot.room (address, area, baths, beds, is_available, price, category_id, city_id,
+                                          host_user_id)
+VALUES ('London', 30, 1, 1, true, 3000, 1, 3, 4);
+
+INSERT INTO case_module4_springboot.room (address, area, baths, beds, is_available, price, category_id, city_id,
+                                          host_user_id)
+VALUES ('London city', 35, 2, 2, true, 3500, 4, 3, 4);
+
+INSERT INTO case_module4_springboot.room (address, area, baths, beds, is_available, price, category_id, city_id,
+                                          host_user_id)
+VALUES ('Paris city', 35, 2, 2, true, 3000, 3, 2, 4);
+
+INSERT INTO case_module4_springboot.room (address, area, baths, beds, is_available, price, category_id, city_id,
+                                          host_user_id)
+VALUES ('Hoan Kiem', 35, 1, 2, true, 1500, 2, 1, 4);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('1.jpg', 1, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('2.jpg', 1, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('3.jpg', 2, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('4.jpg', 4, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('2.jpg', 2, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('5.jpg', 1, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('6.jpg', 2, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('7.jpg', 2, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('2.jpg', 3, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('3.jpg', 3, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('4.jpg', 2, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('8.jpg', 1, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('8.jpg', 2, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('8.jpg', 3, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('8.jpg', 4, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('8.jpg', 5, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('8.jpg', 6, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('8.jpg', 7, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('8.jpg', 8, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('8.jpg', 9, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('8.jpg', 8, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('5.jpg', 8, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('3.jpg', 4, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('2.jpg', 7, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('3.jpg', 5, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('2.jpg', 5, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('5.jpg', 5, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('6.jpg', 6, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('7.jpg', 7, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('9.jpg', 7, null);
+
+INSERT INTO case_module4_springboot.uploading_file (name, room_id, user_id)
+VALUES ('3.jpg', 6, null);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 5, 1, 1);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 4, 2, 2);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 3, null, 3);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 4, null, 1);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 5, null, 2);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 5, null, 3);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 5, null, 4);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 4, null, 4);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 4, null, 5);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 5, null, 5);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 4, null, 6);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 5, null, 7);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 4, null, 8);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 5, null, 9);
+
+INSERT INTO case_module4_springboot.review (content, posted_at, rating, author_user_id, room_id)
+VALUES (null, null, 5, null, 8);
+
